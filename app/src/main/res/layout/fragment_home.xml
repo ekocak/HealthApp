@@ -58,6 +58,7 @@
                 android:layout_width="200dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginVertical="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/step_count"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -112,12 +113,13 @@
                 android:layout_marginHorizontal="5dp"
                 android:text="kalori"/>
 
-            <com.ekremkocak.healthapp.customviews.CustomProgress
+            <com.ekremkocak.healthapp.customviews.BpmCustomView
                 android:id="@+id/text"
                 android:layout_width="200dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginVertical="5dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_burned_calories"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -126,16 +128,123 @@
     </com.google.android.material.card.MaterialCardView>
 
 
-    <com.ekremkocak.healthapp.customviews.BpmCustomView
-        android:id="@+id/bpm_custom"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="15dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_bpm"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/burn"/>
+            <TextView
+                app:layout_constraintTop_toTopOf="@+id/iv_bpm"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_bpm"
+                app:layout_constraintStart_toEndOf="@+id/iv_bpm"
+                android:text="@string/bpm"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="#db4d00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_bpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/iv_bpm"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="51"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bpm"
+                app:layout_constraintStart_toEndOf="@+id/tv_bpm"
+                android:layout_marginHorizontal="5dp"
+                android:text=""/>
+
+            <com.ekremkocak.healthapp.customviews.BpmCustomView
+                android:id="@+id/bpm"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bpm"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="15dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_sleep"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/burn"/>
+            <TextView
+                app:layout_constraintTop_toTopOf="@+id/iv_sleep"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_sleep"
+                app:layout_constraintStart_toEndOf="@+id/iv_sleep"
+                android:text="@string/sleep"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="#db4d00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_sleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/iv_sleep"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="51"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sleep"
+                app:layout_constraintStart_toEndOf="@+id/tv_sleep"
+                android:layout_marginHorizontal="5dp"
+                android:text=""/>
+
+            <com.ekremkocak.healthapp.customviews.SleepCustomView
+                android:id="@+id/sleep"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sleep"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

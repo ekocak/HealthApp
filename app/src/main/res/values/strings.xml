@@ -4,5 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="walk_count">Adım Sayısı</string>
-    <string name="burning_caloriees">Burning Calories</string>
+    <string name="burning_caloriees">Yakılan Kalori</string>
+    <string name="bpm">BPM</string>
+    <string name="sleep">Uyku Zamanlayıcı</string>
 </resources>
