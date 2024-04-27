@@ -20,8 +20,10 @@ class BpmCustomView @JvmOverloads constructor(
     attrs,
     defStyleAttr
 ){
+    private var max = 0
+    private var min = 300
     private val radius = 20f // İstediğiniz radius değerini belirtin
-    private val list = mutableListOf(Bpm(80,90),Bpm(90,100),)
+    private val list = mutableListOf(Bpm(80,90),Bpm(90,100),Bpm(30,100),Bpm(60,70),Bpm(70,80),)
     private var left = 0f
     private val mPaint = Paint()
     override fun onDraw(canvas: Canvas) {

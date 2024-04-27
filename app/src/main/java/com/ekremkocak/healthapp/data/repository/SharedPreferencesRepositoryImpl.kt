@@ -2,6 +2,7 @@ package com.ekremkocak.healthapp.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.ekremkocak.healthapp.data.repository.SharedPreferencesRepository
 
 class SharedPreferencesRepositoryImpl: SharedPreferencesRepository {
 

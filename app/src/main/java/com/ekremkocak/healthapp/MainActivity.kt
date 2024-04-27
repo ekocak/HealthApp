@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkPermissionsAndRun(GOOGLE_FIT_PERMISSIONS_REQUEST_CODE)
 
+
     }
 
 
@@ -150,4 +151,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
 }

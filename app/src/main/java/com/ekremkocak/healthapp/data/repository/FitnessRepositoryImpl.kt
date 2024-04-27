@@ -23,6 +23,9 @@ class FitnessRepositoryImpl(): FitnessRepository {
         .addDataType(DataType.AGGREGATE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
         .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
         .addDataType(DataType.AGGREGATE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+
+        //.addDataType(DataType.TYPE_HEART_POINTS, FitnessOptions.ACCESS_READ)
+        //.addDataType(DataType.AGGREGATE_HEART_POINTS, FitnessOptions.ACCESS_READ)
         .build()
 
     override fun getDailyFitnessData(context: Context): MutableLiveData<DailyFitnessModel> {
@@ -38,6 +41,7 @@ class FitnessRepositoryImpl(): FitnessRepository {
             .aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
             .aggregate(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED)
             .aggregate(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA)
+            //.aggregate(DataType.TYPE_HEART_POINTS, DataType.AGGREGATE_HEART_POINTS)
             .bucketByTime(1, TimeUnit.DAYS)
             .setTimeRange(startTime, System.currentTimeMillis(), TimeUnit.MILLISECONDS)
             .build()
@@ -47,20 +51,28 @@ class FitnessRepositoryImpl(): FitnessRepository {
             .addOnSuccessListener { data ->
                 val buckets = data.buckets
                 val bucket = if (buckets.isNotEmpty()) buckets[0] else null
+                println("test : "+data.buckets)
                 var stepCount = 0
                 var calories = 0
                 var distance = 0.0f
                 bucket?.dataSets?.forEach { dataSet ->
                     dataSet.dataPoints.forEach { dataPoint ->
+                        println("data type: "+dataPoint.dataType)
                         when (dataPoint.dataType) {
                             DataType.TYPE_STEP_COUNT_DELTA -> {
                                 stepCount = dataPoint.getValue(Field.FIELD_STEPS).asInt()
                             }
                             DataType.TYPE_CALORIES_EXPENDED -> {
+                                println("test : "+dataPoint.getValue(Field.FIELD_CALORIES))
                                 calories = dataPoint.getValue(Field.FIELD_CALORIES).asFloat().toInt() / 1000
                             }
                             DataType.TYPE_DISTANCE_DELTA -> {
+                                println("test : "+dataPoint.getValue(Field.FIELD_DISTANCE))
                                 distance = dataPoint.getValue(Field.FIELD_DISTANCE).asFloat() / 1000
+                            }
+                            DataType.TYPE_HEART_POINTS -> {
+                                println("test : "+dataPoint.getValue(Field.FIELD_BPM))
+                                //distance = dataPoint.getValue(Field.FIELD_BPM).asFloat() / 1000
                             }
                         }
                     }

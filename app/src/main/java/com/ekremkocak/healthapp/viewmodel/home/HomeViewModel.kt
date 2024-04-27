@@ -1,4 +1,4 @@
-package com.ekremkocak.healthapp.ui.home
+package com.ekremkocak.healthapp.viewmodel.home
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -20,18 +20,17 @@ class HomeViewModel : ViewModel() {
         var dailyFitnessLiveData = fitnessRepo.getDailyFitnessData(context)
         return dailyFitnessLiveData
     }
+    fun getWeeklyFitnessData(context: Context): LiveData<WeeklyFitnessModel> =
+        fitnessRepo.getWeeklyFitnessData(context)
 
-    fun getWeeklyFitnessData(context: Context): LiveData<WeeklyFitnessModel> {
-        var weeklyFitnessLiveData = fitnessRepo.getWeeklyFitnessData(context)
-        return weeklyFitnessLiveData
-    }
 
-    fun saveObjectiveSteps(context: Context, objectiveSteps: Int) {
+
+    fun saveObjectiveSteps(context: Context, objectiveSteps: Int) =
         sharedPreferencesRepo.saveObjectiveSteps(context, objectiveSteps)
-    }
 
-    fun loadObjectiveSteps(context: Context): Int {
-        return sharedPreferencesRepo.loadObjectiveSteps(context)
-    }
+
+    fun loadObjectiveSteps(context: Context): Int =
+         sharedPreferencesRepo.loadObjectiveSteps(context)
+
 
 }
