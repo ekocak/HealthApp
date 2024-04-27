@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
-import com.ekremkocak.healthapp.data.Bpm
+import com.ekremkocak.healthapp.data.model.Bpm
 import kotlin.random.Random
 
 
@@ -20,12 +20,24 @@ class BpmCustomView @JvmOverloads constructor(
     attrs,
     defStyleAttr
 ){
-    private var max = 0
-    private var min = 300
+    private var max = 0f
+    private var min = 300f
     private val radius = 20f // İstediğiniz radius değerini belirtin
-    private val list = mutableListOf(Bpm(80,90),Bpm(90,100),Bpm(30,100),Bpm(60,70),Bpm(70,80),)
+    private val list = mutableListOf<Bpm>()
     private var left = 0f
+    private var bot = 0f
     private val mPaint = Paint()
+
+    init {
+        //Mock
+        for (i in 0 .. 24){
+            val offset = Random.nextInt(15)
+            if(offset+50 < min )min = offset+50f
+            val value = Random.nextInt(15)
+            if(50+offset+value > max )max = 50f+offset+value
+            list.add(Bpm(50+offset,50+offset+value))
+        }
+    }
     override fun onDraw(canvas: Canvas) {
 
 
@@ -40,12 +52,13 @@ class BpmCustomView @JvmOverloads constructor(
     }
     private  fun createBar(index : Int): Path{
 
-        val firstRadius = if (index == 0) radius else 0f
-        val lastRadius = if (index == list.size-1) radius else 0f
+        val start = height.toFloat()*(list[index].start/min-1)
+        val end = height.toFloat()-(1-list[index].end/max)*height.toFloat()
         val path = Path()
-        val radii = floatArrayOf(firstRadius, firstRadius, lastRadius, lastRadius, lastRadius, lastRadius, firstRadius, firstRadius)
-        //path.addRoundRect(left, 0f, width.toFloat()*(list[index]/total)+left, height.toFloat(), radii, Path.Direction.CW)
-        //left += width.toFloat()*(list[index]/total)
+        val radii = floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+        path.addRoundRect(left, start, width.toFloat()/24f+left-3, end, radii, Path.Direction.CW)
+        println("start : "+start+" - "+height)
+        left += width.toFloat()/24f
         return path
     }
 
