@@ -7,10 +7,11 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
+import com.ekremkocak.healthapp.data.Bpm
 import kotlin.random.Random
 
 
-class CustomProgress @JvmOverloads constructor(
+class BpmCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -20,7 +21,7 @@ class CustomProgress @JvmOverloads constructor(
     defStyleAttr
 ){
     private val radius = 20f // İstediğiniz radius değerini belirtin
-    private val list = mutableListOf<Int>(1,2,3,1,2,3)
+    private val list = mutableListOf(Bpm(80,90),Bpm(90,100),)
     private var left = 0f
     private val mPaint = Paint()
     override fun onDraw(canvas: Canvas) {
@@ -30,20 +31,19 @@ class CustomProgress @JvmOverloads constructor(
 
             mPaint.color = Color.parseColor(pickColor())
             canvas.drawPath(createBar(index),mPaint)
-
+            
         }
 
         super.onDraw(canvas)
     }
     private  fun createBar(index : Int): Path{
-        var total = 0f
-        list.forEach { total += it }
+
         val firstRadius = if (index == 0) radius else 0f
         val lastRadius = if (index == list.size-1) radius else 0f
         val path = Path()
         val radii = floatArrayOf(firstRadius, firstRadius, lastRadius, lastRadius, lastRadius, lastRadius, firstRadius, firstRadius)
-        path.addRoundRect(left, 0f, width.toFloat()*(list[index]/total)+left, height.toFloat(), radii, Path.Direction.CW)
-        left += width.toFloat()*(list[index]/total)
+        //path.addRoundRect(left, 0f, width.toFloat()*(list[index]/total)+left, height.toFloat(), radii, Path.Direction.CW)
+        //left += width.toFloat()*(list[index]/total)
         return path
     }
 
