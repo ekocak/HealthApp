@@ -37,10 +37,18 @@ class SleepCustomView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
 
 
-
         list.forEachIndexed { index, i ->
-            mPaint.color = Color.GREEN
-            mPaint.alpha = 70
+             val mPaint = Paint()
+            mPaint.color = Color.BLUE
+            mPaint.alpha = 100
+            canvas.drawPath(createBar(index, false),mPaint)
+        }
+        left = 0f
+        list.forEachIndexed { index, i ->
+             val mPaint = Paint()
+            mPaint.color = Color.RED
+            mPaint.alpha = 255
+            println("mavi")
             canvas.drawPath(createBar(index, true),mPaint)
         }
 
@@ -48,9 +56,11 @@ class SleepCustomView @JvmOverloads constructor(
     }
     private  fun createBar(index : Int,stroke : Boolean): Path{
 
+        val top = if(stroke) height*0.15f else height.toFloat()
         val path = Path()
         val radii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
-        path.addRoundRect(left, 0f, width.toFloat()/4f-5+left, height.toFloat(), radii, Path.Direction.CW)
+        path.addRoundRect(left, 0f, width.toFloat()/4f-5+left, top, radii, Path.Direction.CW)
+
         left += width.toFloat()/4f
         return path
     }
